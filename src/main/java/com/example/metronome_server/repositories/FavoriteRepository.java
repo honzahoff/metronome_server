@@ -1,6 +1,6 @@
-package com.example.metronome_server.repository;
+package com.example.metronome_server.repositories;
 
-import com.example.metronome_server.model.Favorite;
+import com.example.metronome_server.models.Favorite;
 import org.springframework.data.repository.CrudRepository;
 
 public interface FavoriteRepository extends CrudRepository<Favorite, Integer> {

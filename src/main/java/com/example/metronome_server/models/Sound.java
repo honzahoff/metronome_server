@@ -1,4 +1,4 @@
-package com.example.metronome_server.model;
+package com.example.metronome_server.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +14,7 @@ public class Sound {
     private @Setter Integer id;
 
     @OneToMany(mappedBy = "sound")
-    private List<Favorite> favorites;
+    private @Setter List<Favorite> favorites;
 
     private @Setter String name;
 

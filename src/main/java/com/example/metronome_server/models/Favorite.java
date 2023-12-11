@@ -1,4 +1,4 @@
-package com.example.metronome_server.model;
+package com.example.metronome_server.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,16 +12,16 @@ public class Favorite {
     private @Setter Integer id;
 
     @ManyToOne
-    private User user;
+    private @Setter User user;
 
-    private @Setter @Getter String name;
+    private @Setter String name;
 
-    private @Setter @Getter String signature;
+    private @Setter String signature;
 
     @ManyToOne
-    private @Setter @Getter Sound sound;
+    private @Setter Sound sound;
 
-    private @Setter @Getter Integer tempo;
+    private @Setter  Integer tempo;
 
 
 }
