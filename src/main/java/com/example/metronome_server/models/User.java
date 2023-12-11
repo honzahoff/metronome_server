@@ -14,9 +14,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     private @Setter Integer id;
 
-    private @Setter String userName;
+    private @Setter String name;
 
-    @OneToMany(mappedBy = "user")
+    private @Setter String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private @Setter List<Favorite> favorites;
 
     @OneToOne(cascade = CascadeType.ALL)

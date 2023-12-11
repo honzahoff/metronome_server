@@ -1,9 +1,0 @@
-package com.example.metronome_server.exceptions;
-
-public class UserNotFoundException extends RuntimeException{
-    public UserNotFoundException(){}
-
-    public UserNotFoundException(String message){
-        super(message);
-    }
-}

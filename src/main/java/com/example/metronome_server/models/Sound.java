@@ -13,7 +13,7 @@ public class Sound {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     private @Setter Integer id;
 
-    @OneToMany(mappedBy = "sound")
+    @OneToMany(mappedBy = "sound", cascade = CascadeType.ALL)
     private @Setter List<Favorite> favorites;
 
     private @Setter String name;
