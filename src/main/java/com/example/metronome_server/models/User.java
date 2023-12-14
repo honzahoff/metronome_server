@@ -14,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     private @Setter Integer id;
 
-    private @Setter String name;
+    private @Setter String username;
 
     private @Setter String email;
 

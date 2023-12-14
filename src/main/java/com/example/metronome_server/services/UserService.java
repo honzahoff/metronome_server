@@ -29,11 +29,11 @@ public class UserService {
         }
     }
 
-    public User updateUsername(Integer id, String name) throws EntityNotFoundException{
+    public User updateUsername(Integer id, String username) throws EntityNotFoundException{
         Optional<User> optionalUser = userRepository.findById(id);
         if(optionalUser.isPresent()){
             User user = optionalUser.get();
-            user.setName(name);
+            user.setUsername(username);
             return userRepository.save(user);
         } else {
             throw new EntityNotFoundException("User with id " + id + "not found");

@@ -34,7 +34,7 @@ public class UserControllerTest {
     @Test
     public void addNewUserTest() throws Exception{
         User user = new User();
-        user.setName("test test");
+        user.setUsername("test test");
         user.setEmail("test@test.cz");
         user.setFavorites(null);
         user.setSettings(null);
@@ -44,8 +44,8 @@ public class UserControllerTest {
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON).content(mapper
                 .writeValueAsString(user)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name")
-                        .value(user.getName()))
+                .andExpect(jsonPath("$.username")
+                        .value(user.getUsername()))
                 .andExpect(jsonPath("$.email")
                         .value(user.getEmail()))
                 .andExpect(jsonPath("$.favorites")

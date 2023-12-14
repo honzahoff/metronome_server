@@ -20,7 +20,7 @@ public class Sound {
 
     private @Setter String version;
 
-    private @Setter String first_beat_sound_path;
+    private @Setter String dominantBeatSoundPath;
 
-    private @Setter String other_beat_sound_path;
+    private @Setter String subBeatSoundPath;
 }

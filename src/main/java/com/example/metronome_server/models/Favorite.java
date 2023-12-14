@@ -21,7 +21,7 @@ public class Favorite {
     @ManyToOne
     private @Setter Sound sound;
 
-    private @Setter  Integer tempo;
+    private @Setter Integer tempo;
 
 
 }
