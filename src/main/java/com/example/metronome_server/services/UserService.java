@@ -89,15 +89,6 @@ public class UserService {
         }
     }
 
-    public User findById(Integer id) throws EntityNotFoundException{
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()){
-            return optionalUser.get();
-        } else {
-            throw new EntityNotFoundException("User with id " + id + " not found");
-        }
-    }
-
     public User findByEmail(String email) throws EntityNotFoundException{
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if (optionalUser.isPresent()){
@@ -105,9 +96,6 @@ public class UserService {
         } else {
             throw new EntityNotFoundException("User with email " + email + " not found");
         }
-    }
-    public Iterable<User> findAll(){
-        return userRepository.findAll();
     }
 
     public Set<Favorite> getFavorites(Integer userId){

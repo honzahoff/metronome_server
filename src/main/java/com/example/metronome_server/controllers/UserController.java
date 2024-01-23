@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+/**
+ * User controller
+ * - Manages API endpoints
+ */
 @CrossOrigin(origins = "*")
 @Controller
 @RequestMapping(path="/users")
 public class UserController {
 
+    // User service to be used
     private final UserService userService;
 
     public UserController(UserService userService){
@@ -73,22 +78,6 @@ public class UserController {
         }
     }
 
-
-    @GetMapping
-    public @ResponseBody Iterable<User> getUsers(){
-        return userService.findAll();
-    }
-
-    @GetMapping(path="/{id}")
-    public @ResponseBody ResponseEntity<User> getUser (@PathVariable Integer id){
-        try {
-            User user = userService.findById(id);
-            return ResponseEntity.ok(user);
-        } catch (EntityNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-
     @GetMapping(path = "/{id}/favorites")
     public @ResponseBody ResponseEntity<Set<Favorite>> getFavorites (@PathVariable Integer id){
         try {
@@ -113,26 +102,6 @@ public class UserController {
     public @ResponseBody ResponseEntity<String> removeFavorite(@PathVariable Integer userId, @PathVariable Integer favoriteId) {
         try {
             userService.removeFavorite(userId, favoriteId);
-            return ResponseEntity.ok("Removed");
-        } catch (EntityNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping(path="/{id}")
-    public @ResponseBody ResponseEntity<String> deleteUser (@PathVariable Integer id){
-        try {
-            userService.deleteById(id);
-            return ResponseEntity.ok("Removed");
-        } catch (EntityNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping(path="/deleteByEmail/{email}")
-    public @ResponseBody ResponseEntity<String> deleteUserByEmail (@PathVariable String email){
-        try {
-            userService.deleteByEmail(email);
             return ResponseEntity.ok("Removed");
         } catch (EntityNotFoundException e){
             return ResponseEntity.notFound().build();
