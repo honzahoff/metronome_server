@@ -1,5 +1,7 @@
 package com.example.metronome_server.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,16 +14,14 @@ public class Favorite {
     private @Setter Integer id;
 
     @ManyToOne
+    @JsonBackReference(value="user-favorites")
     private @Setter User user;
 
     private @Setter String name;
 
     private @Setter String signature;
 
-    @ManyToOne
-    private @Setter Sound sound;
+    private @Setter String sound;
 
     private @Setter Integer tempo;
-
-
 }

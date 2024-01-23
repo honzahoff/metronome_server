@@ -1,22 +1,24 @@
 package com.example.metronome_server.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
-public class Settings {
+public class Session {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     private @Setter Integer id;
 
-    private @Setter Boolean hapticFeedback;
+    private @Setter LocalDateTime startTime;
+    private @Setter LocalDateTime endTime;
 
-    @OneToOne(mappedBy = "settings")
-    @JsonBackReference(value="user-settings")
+    @ManyToOne
+    @JsonBackReference(value="user-sessions")
     private @Setter User user;
 }

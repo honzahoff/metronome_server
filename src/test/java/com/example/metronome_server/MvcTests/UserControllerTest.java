@@ -34,7 +34,7 @@ public class UserControllerTest {
     @Test
     public void addNewUserTest() throws Exception{
         User user = new User();
-        user.setUsername("test test");
+        user.setName("test test");
         user.setEmail("test@test.cz");
         user.setFavorites(null);
         user.setSettings(null);
@@ -45,7 +45,7 @@ public class UserControllerTest {
                 .writeValueAsString(user)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username")
-                        .value(user.getUsername()))
+                        .value(user.getName()))
                 .andExpect(jsonPath("$.email")
                         .value(user.getEmail()))
                 .andExpect(jsonPath("$.favorites")

@@ -2,12 +2,15 @@ package com.example.metronome_server.controllers;
 
 import com.example.metronome_server.exceptions.EntityNotFoundException;
 import com.example.metronome_server.models.Favorite;
+import com.example.metronome_server.models.Session;
 import com.example.metronome_server.models.Settings;
 import com.example.metronome_server.models.User;
 import com.example.metronome_server.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -30,20 +33,10 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}/username")
-    public @ResponseBody ResponseEntity<User> updateUsername(@PathVariable Integer id, @RequestParam String username){
+    @PutMapping("/{id}/name")
+    public @ResponseBody ResponseEntity<User> updateName(@PathVariable Integer id, @RequestParam String name){
         try {
-            User user = userService.updateUsername(id, username);
-            return ResponseEntity.ok(user);
-        } catch (EntityNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("/{id}/email")
-    public @ResponseBody ResponseEntity<User> updateEmail(@PathVariable Integer id, @RequestParam String email){
-        try {
-            User user = userService.updateEmail(id, email);
+            User user = userService.updateName(id, name);
             return ResponseEntity.ok(user);
         } catch (EntityNotFoundException e){
             return ResponseEntity.notFound().build();
@@ -70,6 +63,17 @@ public class UserController {
         }
     }
 
+    @PutMapping("/{id}/sessions")
+    public @ResponseBody ResponseEntity<User> addSession(@PathVariable Integer id, @RequestBody Session session){
+        try {
+            User user = userService.addSession(id, session);
+            return ResponseEntity.ok(user);
+        } catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @GetMapping
     public @ResponseBody Iterable<User> getUsers(){
         return userService.findAll();
@@ -85,11 +89,31 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{userId}/favorites/{favoriteId}")
-    public @ResponseBody ResponseEntity<User> removeFavorite(@PathVariable Integer userId, @PathVariable Integer favoriteId) {
+    @GetMapping(path = "/{id}/favorites")
+    public @ResponseBody ResponseEntity<Set<Favorite>> getFavorites (@PathVariable Integer id){
         try {
-            User user = userService.removeFavorite(userId, favoriteId);
+            Set<Favorite> favorites = userService.getFavorites(id);
+            return ResponseEntity.ok(favorites);
+        } catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping(path="/getByEmail/{email}")
+    public @ResponseBody ResponseEntity<User> getUserByEmail (@PathVariable String email){
+        try {
+            User user = userService.findByEmail(email);
             return ResponseEntity.ok(user);
+        } catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{userId}/favorites/{favoriteId}")
+    public @ResponseBody ResponseEntity<String> removeFavorite(@PathVariable Integer userId, @PathVariable Integer favoriteId) {
+        try {
+            userService.removeFavorite(userId, favoriteId);
+            return ResponseEntity.ok("Removed");
         } catch (EntityNotFoundException e){
             return ResponseEntity.notFound().build();
         }
@@ -103,6 +127,15 @@ public class UserController {
         } catch (EntityNotFoundException e){
             return ResponseEntity.notFound().build();
         }
+    }
 
+    @DeleteMapping(path="/deleteByEmail/{email}")
+    public @ResponseBody ResponseEntity<String> deleteUserByEmail (@PathVariable String email){
+        try {
+            userService.deleteByEmail(email);
+            return ResponseEntity.ok("Removed");
+        } catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 }
